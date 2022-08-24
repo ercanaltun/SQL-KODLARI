@@ -1,0 +1,65 @@
+
+create table kurs(
+kurs_id int,
+kurs_ismi varchar(20),
+turu varchar(20),
+ucret int	
+);
+
+select * from kurs;
+
+
+--DDL(DATA DEFİNİTİON LANGUANGE)--
+--Tablo dışıyla uğraşır.column'lar ekleme,isimlerini değiştirme veya table'ı silme gibi--
+create table kurs2 AS  select kurs_id, turu, ucret from kurs;
+
+create table kurs3 as select kurs_id, kurs_ismi,ucret from kurs;
+
+drop table kurs3;
+
+
+alter table kurs2 add kurs_ismi varchar(20);
+
+select * from kurs2;
+
+alter table kurs2 add column adres varchar(20);--adres isminde sütun ekledi
+
+alter table kurs2 drop column adres; -- adres ismindeki sütunu sildi
+
+alter table kurs2 rename column kurs_ismi to kurs_adı;
+
+alter table kurs rename column kurs_ismi to kurs_adı;
+
+alter table kurs rename column kurs_adı to kursiyer;
+
+
+--DML(DATA MANUPILATION LANGUANGE)--
+--Tablo içindeki verilerde ekleme,değiştirme ve silme işlemi yapar
+INSERT into kurs VALUES(10, 'Salih Altun', 'Data Siencite', 1350);
+insert into kurs VALUES(20, 'Selim Altun', 'Java Developer', 1000);
+insert into kurs VALUES(30, 'Ercan Altun', 'Tester', 1000);
+insert into kurs VALUES(40, 'Taha Bisgin', 'Cyber Security', 1200);
+insert into kurs(turu,ucret) VALUES('Cyber Security',1500);--isim girmediğimiz için null atadı
+
+select * from kurs;
+
+update kurs SET turu='Java Developer' WHERE kurs_id=10;
+update kurs set kurs_id=50, kursiyer='Kübra Altun' WHERE ucret=1500;
+--Update yaptığımızda en sonki işleme göre pc sıralar.bunu değiştirmek için şu syntax kullanılır
+--=>select * from kurs order by kurs_id;
+
+select * from kurs order by kurs_id;
+update kurs set ucret=1250 where kurs_id=30;
+
+delete from kurs where kurs_id=50;
+delete from kurs where kursiyer='Taha Bisgin' or ucret=1200;
+
+
+
+
+
+
+
+
+
+
