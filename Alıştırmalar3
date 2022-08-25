@@ -1,0 +1,173 @@
+create table teachers(
+isim_soyisim varchar(30),
+branş varchar(20),
+yas int,
+ogretmenlik_senesi int);
+
+create table ogrt as  select yas, branş from teachers;
+
+alter table ogrt  add ogretmenlik_senesi varchar(20);
+select * from ogrt
+
+select * from teachers
+
+alter table teachers add sehir varchar(20);
+
+alter table teachers rename column sehir to kent;
+
+alter table teachers drop column kent;
+
+drop table teachers
+
+------------------------------------------------------------------------
+
+insert into teachers values(1001,'Ercan Altun','Teknoloji ve Tasarım',44);
+insert into teachers values(1002,'Salih Baba','Matematik',25);
+insert into teachers values(1003,'Amine Kübra','İngilizce','39');
+insert into teachers values(1004,'Selim Dede','Fizik',36);
+
+select * from teachers
+
+-------------------------------------------------------------------------
+
+update teachers  set branş='BiyoKimya' where yas=25; 
+
+update teachers set yas=38 where branş='İngilizce';
+
+delete from teachers where isim_soyisim='Selim Dede' or branş='Fizik';
+
+select * from teachers
+
+-------------------------------------------------------------------------
+--------------------------PRİMARY KEY------------------------------------
+
+create table teachers (id int primary key,
+					   
+isim_soyisim varchar(20) unique,
+					   
+branş varchar(30) Not Null,
+					   
+yas int);	
+
+-------------------------------------------------------------------------
+------------------------FOREIGN KEY--------------------------------------
+
+create table teachers_adress(
+	
+adres_id int,
+	
+mahalle varchar(20),not null
+	
+sokak varchar(20),not null
+	
+sehir varchar(20),not null
+	
+constraint kısıtlamalar Foreign Key(adres_id) References teachers(id)	
+);
+
+
+insert into teachers_adress values(1002,'30 Agustos','Dere','Ankara');
+
+insert into teachers_adress values(1004,'Paşa','Susam','Adana');
+
+insert into teachers_adress values(1003,'Beşevler','Zambak','Bursa');
+
+insert into teachers_adress values(1001,'Doğan','Barış','İzmir');
+
+select * from teachers
+select * from teachers_adress
+
+------------------------------------------------------------------------
+
+create table teachers2(
+teachers2_id varchar(5),	
+isim_soyisim varchar(30),
+branş varchar(20),
+yas int,
+ogretmenlik_senesi int);
+
+Alter table teachers2 Add primary key(teachers2_id);
+
+
+---------------------------------------------------------------------------
+
+----------- SELECT komutunda ==> BETWEEN Koşulu  --------------------------
+
+-- Between belirttiniz 2 veri arasındaki bilgileri listeler 
+
+-- Between de belirttimiz değerlerde listelemeye DAHİLDİR
+
+
+-------------BETWEEN ile birlikte " AND "" ---------------------------------
+
+--ÖRNEK: Select * from matematik sinav1 > 50 AND sınav2 > 50
+--Hem sınav1 hemde sınav2 alanı, 50'den büyük olan kayıtları listeler
+
+--SORU-1 : id'si 1003 ile 1005 arasında olan teachers bilgisini listeleyiniz
+select * from teachers where id between 1001 and 1003;--1001,1002,1003 'ü getirir.
+
+--SORU -2 :Yaşı 25 ile 40 arasında olan teachers ları listele
+select *  from teachers where yas between 25 and 40;
+
+
+------------- " OR "" -----------------------------------------------------
+
+--OR (VEYA): Belirtilen şartlardan biri gerçekleşirse, kayıt listelenir
+-- ÖRNER : select * From matematik sınav>50 OR sınav2>50 
+--Hem sınav1 veya sınav2 alanı, 50 den büyük olan kayıtları listeler
+
+--SORU-2: ismi_soymi Selim Dede olan veya branşı matematik olan ötgretmeni getir
+select * from teachers where isim_soyisim ='Selim Dede' or branş='Matematik';
+
+--SORU-3 : sehir ismi Ankara ve Bursa Arasında olanları listele
+select * from teachers_adress where sehir between 'Ankara' and 'Bursa';
+
+
+select * from teachers
+select * from teachers_adress order by adres_id
+
+
+--------------------- IN ----------------------------------------------------
+
+--IN : Birden fazla mantıksal ifade ile tanımlayabileceğimiz durumları tek komutta yazabilme 
+
+--SORU-1 : teachers_adress tablosunda adres_id si 1001,1002,1003 olanları listele
+select * from teachers_adress where adres_id in (1001,1002,1003);
+
+--SORU-2 :teacher tablosundan yasları 25,36,44 olan teachers'ları listele
+select * from teachers where yas in(25,36,44);
+
+
+------- "LIKE = ~~ ""  ---- "NOT LIKE = !~~ "" ---- "ILIKE = ~~* ""---------"NOT ILIKE = !~~* ""------
+
+--LIKE : Sorgulama yaparken belirli (pattern) kalıp ifadeleri kullanabilmemizi sağlar
+
+--ILIKE : Sorgulama yaparken büyük/küçük harfe duyarsız olarak eşleştirir
+
+
+--------------------- " % " -------------- "_" ---------------------------------------                  
+
+% --> 0 veya daha fazla karakteri belirtir.
+
+_ --> Tek bir karakteri belirtir
+
+-- SORU -1: Ismi A harfi ile baslayan Şehirleri listele
+select * from teachers_adress WHERE sehir like 'A%';  --Ankara,Adana
+
+--Soru-2:Ismi n harfi ile biten personeli listele
+select * from teachers WHERE isim_soyisim like '%n'; --Ercan Altun
+
+--SORU-3: Isminin 2. harfi e olan personeli listeleyiniz
+select * from  teachers where branş ilike '_i%'; ---Fizik
+
+
+
+
+
+
+
+
+
+
+
+
