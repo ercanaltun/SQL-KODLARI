@@ -45,7 +45,7 @@ from markalar;
 
 --Her markanin id’sini, ismini ve toplam kaç şehirde 
 --bulunduğunu listeleyen bir SORGU yaziniz.
-select marka_id,Marka_isim,(select count(sehir) from calisanlar2 where marka_isim=isyeri)
+select marka_id,marka_isim,(select count(sehir) from calisanlar2 where marka_isim=isyeri)
 As sehir_sayisi from markalar
 
 --Interview Question: En yüksek ikinci maas değerini çağırın.
@@ -61,9 +61,7 @@ where maas>(select min (maas)from calisanlar2)
 ----Interview Question: En yüksek üçüncü maas değerini çağırın.
 select max(maas)as enyuksek_ucuncumaas from calisanlar2 where
 maas<(select max(maas) from calisanlar2 where maas<(select max(maas) from calisanlar2))
---ÖDEV: en düşük 3 . maaşı bul :(
 
-select * from calisanlar2
 
 
 
