@@ -49,8 +49,37 @@ INSERT INTO insanlar (ssn) VALUES('999111222');
 
 select * from insanlar
 
--- isim i null olanlari sorgula
+-- ismi null olanlari sorgula
 SELECT * from insanlar where isim is null
+
+-- ismi null olmayanlari sorgula
+SELECT * from insanlar where isim is not null
+
+-- isim 'i NULL olan kişilerin isim'ine NO NAME atayınız.
+update insanlar set
+isim='No name' where isim is null
+
+--NOT: Çoklu değişimde her değişm için set... Where İsim IS NULL gibi
+--ifade yazmamak için COALESCE(Birleştirme) kullanılır
+
+/* 
+isim 'i NULL olanlara 'Henuz isim girilmedi'
+adres 'i NULL olanlara 'Henuz adres girilmedi'
+ssn 'i NULL olanlara ' no ssn' atayalım.
+*/
+
+update insanlar
+set isim=coalesce (isim,'HENUZ ISIM GIRILMEDI'),
+adres=coalesce (adres,'HENUZ ADRES GIRILMEDI'),
+ssn=coalesce (ssn,'NO SSN');
+
+select *from insanlar
+
+
+
+
+
+
 
 
 
