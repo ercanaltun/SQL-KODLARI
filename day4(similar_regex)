@@ -81,7 +81,7 @@ select * from kelimeler where kelime ~*'h[a-e](.*)t' --REGEX ile
 
 select * from kelimeler where kelime similar to '[s|a|y]%'
 
-select * from kelimeler where kelime ~* 
+select * from kelimeler where kelime ~* '^[say](.*)'
 
 --Son karakteri 'm', 'a' veya 'f' olan "kelime" değerlerini çağırın.
 

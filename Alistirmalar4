@@ -1,0 +1,228 @@
+create table personel
+(
+id char(4),
+isim varchar(50),
+maas int
+);
+insert into personel values('1001', 'Ali Can', 70000);
+insert into personel values('1002', 'Veli Mert', 85000);
+insert into personel values('1003', 'Ayşe Tan', 65000);
+insert into personel values('1004', 'Derya Soylu', 95000);
+insert into personel values('1005', 'Yavuz Bal', 80000);
+insert into personel values('1006', 'Sena Beyaz', 100000);
+insert into personel values('1007', 'Sena Kurtar', 110000);
+
+-- Ismi A harfi ile baslayan personeli listele
+select * from personel where isim ~~ 'A%'
+
+-- Ismi t harfi ile biten personeli listele
+select * from personel where isim ~~ '%t'
+
+-- Isminin 2. harfi e olan personeli listeleyiniz
+select * from personel where isim ~~'_e%'
+
+-- 'a' ile başlayıp 'n' ile biten personel isimlerini listeleyiniz
+select * from personel where isim ~~*'a%n'
+
+--Soru 1: 2.karakteri 'a' ve 4. karakteri 'u' olan personel isimlerini listeleyiniz
+select * from personel where isim ~~* '_a_u%'
+
+-- İçinde 'e' ve 'r' bulunan personel isimlerini listeleyiniz
+select * from personel where isim ~~*'%e%' and isim ~~* '%r%'
+
+-- 2. harfi e olup diğer harflerinde y olan personeli listeleyiniz
+select * from personel where isim ~~*'_e%y%'
+
+-- a harfi olmayan personeli listeleyin
+select * from personel where isim !~~* '%a%' and isim !~~*'a%'  and isim !~~*'%a'
+
+-- 1. harfi A ve 7. harfi a olan personeli listeleyin
+select * from personel where isim ~~*'A_____a%'
+
+--Sondan ikinci karakteri 'r' olan "isim" değerlerini listeleyiniz.
+select * from personel where isim ~~*'_%_r'
+
+----------------------------------------------------------------------------------------------------------
+
+CREATE TABLE kelimeler
+(
+id int,
+kelime VARCHAR(50),
+harf_sayisi int
+);
+
+   INSERT INTO kelimeler VALUES (1001, 'hot', 3);
+   INSERT INTO kelimeler VALUES (1002, 'hat', 3);
+   INSERT INTO kelimeler VALUES (1003, 'hit', 3);
+   INSERT INTO kelimeler VALUES (1004, 'hbt', 3);
+   INSERT INTO kelimeler VALUES (1005, 'hct', 3);
+   INSERT INTO kelimeler VALUES (1006, 'adem', 4);
+   INSERT INTO kelimeler VALUES (1007, 'selim', 5);
+   INSERT INTO kelimeler VALUES (1008, 'yusuf', 5);
+   INSERT INTO kelimeler VALUES (1009, 'hip', 3);
+   INSERT INTO kelimeler VALUES (1010, 'HOT', 3);
+   INSERT INTO kelimeler VALUES (1011, 'hOt', 3);
+   INSERT INTO kelimeler VALUES (1012, 'h9t', 3);
+   INSERT INTO kelimeler VALUES (1013, 'hoot', 4);
+   INSERT INTO kelimeler VALUES (1014, 'haaat', 5);
+   INSERT INTO kelimeler VALUES (1015, 'hooooot', 5);
+   INSERT INTO kelimeler VALUES (1016, 'booooot', 5);
+   INSERT INTO kelimeler VALUES (1017, 'bolooot', 5);
+
+
+
+select * from kelimeler
+
+-- Soru 1: İçerisinde 'ot' veya 'at' bulunan kelimeleri listeleyiniz
+--Similar ile 
+select * from  kelimeler where kelime similar to '%ot%|%at%'
+
+--Regex ile 
+select * from  kelimeler where kelime ~* '[ot][at]'
+
+--like ile
+select * from  kelimeler where kelime ~~*'%ot%' or  kelime ~~*'%at%'
+
+-- : 'ho' veya 'hi' ile başlayan kelimeleri listeleyeniz
+select * from  kelimeler where kelime similar to 'ho%|hi%'
+select * from  kelimeler where kelime ~'h[oi](.*)'
+select * from  kelimeler where kelime ~~'ho%' or kelime ~~'hi%'
+
+--Sonu 't' veya 'm' ile bitenleri listeleyeniz
+select * from  kelimeler where kelime similar to '%t|%m'
+select * from  kelimeler where kelime ~'(.*)[tm]$'
+select * from  kelimeler where kelime ~~'%t' or kelime ~~'%m'
+
+-- h ile başlayıp t ile biten 3 harfli kelimeleri listeleyeniz
+select * from  kelimeler where kelime similar to 'h_t'
+select * from  kelimeler where kelime ~'h.t$'
+select * from  kelimeler where kelime ~~'h_t'
+
+--İlk karakteri 'h', son karakteri 't' ve ikinci karakteri 'a'dan 'e'ye herhangi bir karakter olan
+--“kelime" değerlerini çağırın.
+select * from  kelimeler where kelime similar to 'h[a-e]%t'
+select * from  kelimeler where kelime ~ 'h[a-e](.*)t$'
+
+--İlk karakteri 's', 'a' veya 'y' olan "kelime" değerlerini çağırın.
+select * from  kelimeler where kelime similar to '[say]%'
+select * from  kelimeler where kelime ~'^[say](.*)'
+
+--Son karakteri 'm', 'a' veya 'f' olan "kelime" değerlerini çağırın.
+select * from  kelimeler where kelime similar to '%[m|a|f]'
+select * from  kelimeler where kelime ~ '[maf]$'
+select * from  kelimeler where kelime ~~ '%m' or kelime ~~ '%a' or kelime ~~ '%f'
+
+--İlk harfi h, son harfi t olup 2.harfi a veya i olan 3 harfli kelimelerin tüm bilgilerini sorgulayalım.
+select * from  kelimeler where kelime similar to 'h[ai]t'
+select * from  kelimeler where kelime ~'h[ai]t$'
+
+--İlk harfi 'b' dan ‘s' ye bir karakter olan ve ikinci harfi herhangi bir 
+--karakter olup üçüncü harfi ‘l' olan “kelime" değerlerini çağırın.
+select * from  kelimeler where kelime similar to '[b-s]_l%'
+select * from  kelimeler where kelime ~'[b-s].l(.*)'
+
+
+--içerisinde en az 2 adet oo barıdıran kelimelerin tüm bilgilerini listeleyiniz.
+select * from  kelimeler where kelime similar to '%oo%' and kelime similar to '%oo%oo%'
+select * from  kelimeler where kelime ~'[o][o]{2}'
+
+
+--'a', 's' yada 'y' ile başlayan VE 'm' yada 'f' ile biten "kelime" değerlerini çağır
+select * from kelimeler where kelime similar to '[asy]%[mf]'
+select * from kelimeler where kelime ~ '[asy](.*)[mf]$'
+
+-----------------------------------------------------------------------------------------------------------
+
+CREATE TABLE tedarikciler -- parent
+(
+vergi_no int PRIMARY KEY,
+firma_ismi VARCHAR(50),
+irtibat_ismi VARCHAR(50)
+);
+
+
+INSERT INTO tedarikciler VALUES (101, 'IBM', 'Kim Yon');
+INSERT INTO tedarikciler VALUES (102, 'Huawei', 'Çin Li');
+INSERT INTO tedarikciler VALUES (103, 'Erikson', 'Maki Tammen');
+INSERT INTO tedarikciler VALUES (104, 'Apple', 'Adam Eve');
+
+select * from tedarikciler
+
+----------------------------                                 
+
+CREATE TABLE urunler -- child
+(
+ted_vergino int,
+urun_id int,
+urun_isim VARCHAR(50),
+musteri_isim VARCHAR(50),
+CONSTRAINT fk_urunler FOREIGN KEY(ted_vergino) REFERENCES tedarikciler(vergi_no)
+on delete cascade
+);
+
+
+
+INSERT INTO urunler VALUES(101, 1001,'Laptop', 'Ayşe Can');
+INSERT INTO urunler VALUES(102, 1002,'Phone', 'Fatma Aka');
+INSERT INTO urunler VALUES(102, 1003,'TV', 'Ramazan Öz');
+INSERT INTO urunler VALUES(102, 1004,'Laptop', 'Veli Han');
+INSERT INTO urunler VALUES(103, 1005,'Phone', 'Canan Ak');
+INSERT INTO urunler VALUES(104, 1006,'TV', 'Ali Bak');
+INSERT INTO urunler VALUES(104, 1007,'Phone', 'Aslan Yılmaz');
+
+ select * from urunler
+ select * from tedarikciler
+
+--------------------------------------------------------------
+
+--  vergi_no’su 102 olan tedarikcinin firma ismini 'Vestel' olarak güncelleyeniz.
+update tedarikciler
+set firma_ismi='Vestel' where vergi_no=102
+
+
+
+-- vergi_no’su 101 olan tedarikçinin firma ismini 'casper' 
+--ve irtibat_ismi’ni 'Ali Veli' olarak güncelleyiniz.
+update tedarikciler
+set firma_ismi='Casper' where vergi_no=101
+
+
+--  urunler tablosundaki 'Phone' değerlerini 'Telefon' olarak güncelleyiniz.
+update urunler
+set urun_isim='Telefon' where urun_isim='Phone'
+
+
+--  urunler tablosundaki urun_id değeri 1004'ten büyük olanların urun_id’sini 1 arttırın.
+update urunler
+set  urun_id= urun_id+1 where  urun_id>1004
+
+
+--  urunler tablosundaki tüm ürünlerin urun_id
+--değerini ted_vergino sutun değerleri ile toplayarak güncelleyiniz.
+update urunler
+set urun_id=urun_id+ted_vergino 
+
+
+--urunler tablosundan Ali Bak’in aldigi urunun ismini, tedarikci tablosunda irtibat_ismi
+-- 'Adam Eve' olan firmanın ismi (firma_ismi) ile degistiriniz.
+
+update urunler
+set urun_isim= (select firma_ismi from tedarikciler where irtibat_ismi='Adam Eve' )
+where musteri_isim='Ali Bak'
+
+select * from urunler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
