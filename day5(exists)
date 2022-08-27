@@ -1,7 +1,7 @@
 --EXISTS, NOT EXISTS--
 --EXISTS condition subquery ile kullanılır.IN ifadesinin kullanımına benzer
 --EXISTS ve  EXISTS ifadeleri de alt sorgudan getirilen değerlerin içerisnde
--- bir değerin olmamsı veya olmaması durumunda işlem yapılmasını sağlar.
+-- bir değerin olması veya olmaması durumunda işlem yapılmasını sağlar.
 --EXISTS => true / false gibidir.Boolean
 
 CREATE TABLE mart
@@ -44,7 +44,7 @@ where exists (select urun_id from nisan where mart.urun_id=nisan.urun_id)
 --Her iki ayda birden satılan ürünlerin URUN_ISIM'lerini ve bu ürünleri
 --NİSAN ayında satın alan MUSTERI_ISIM'lerini listeleyen bir sorgu yazınız.  
   
-select urun_isim,Musteri_isim from nisan
+select urun_isim,musteri_isim from nisan
 where exists (select urun_isim from mart where mart.urun_isim=nisan.urun_isim)
   
   
