@@ -1,0 +1,42 @@
+CREATE TABLE workers
+(
+  id int,
+  name varchar(20),
+  title varchar(60),
+  manager_id int
+);
+
+INSERT INTO workers VALUES(1, 'Ali Can', 'Dev', 2);
+INSERT INTO workers VALUES(2, 'John Davis', 'QA', 3);
+INSERT INTO workers VALUES(3, 'Angie Star', 'Dev Lead', 4);
+INSERT INTO workers VALUES(4, 'Amy Sky', 'CEO', 5);
+
+select * from workers;
+
+-- 1:Tabloya company_industry isminde sütun ekleyiniz
+Alter table workers add company_industry varchar(30);
+
+-- 2:tablodaki worker_address sütununu ekeleyin
+Alter table workers add column worker_address varchar(40);
+
+-- 3:tablodaki worker_address sütununu siliniz
+Alter table workers drop column worker_address;
+Alter table employees drop column company_industry;
+
+-- 4:Tablodaki company_industry sütununu, company_profession olarak değiştiriniz.
+Alter table workers rename company_industry to company_profession;
+
+-- 5: Tablonun ismini employees olarak değişitiriniz.
+Alter table workers rename to employees
+Drop table employees
+Select * from employees
+
+-- Tablodaki title sütununa data tipini VARCHAR(50) olarak değiştiriniz.
+Alter table employees Alter title type   varchar(50);
+
+-- Tablodaki title sütununa "UNIQUE" kıstlaması ekleyiniz.
+Alter table employees add constraint title unique (title) 
+
+
+
+
