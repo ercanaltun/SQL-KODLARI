@@ -1,0 +1,17 @@
+ -------GROUP BY -- HAVİNG ---------
+/*
+HAVING ifadesinin işlevi WHERE ifadesininkine çok benziyor. Ancak kümeleme fonksiyonları ile
+WHERE ifadesi birlikte kullanılmadığında HAVING ifadesine ihtiyac duyulmuştur
+GROUP BY ile kullanılır gruplamadan sonraki şart için group by dan sonra HAVING kullanılır
+*/
+select * from personel
+
+--Maaş ortalaması 3000’den fazla olan ülkelerdeki erkek çalışanların maaş ortalaması.
+Select ulke,round(avg(maas))As maaş_ortalamsı from personel
+where cinsiyet='E'
+group by ulke having round(avg(maas))>3000
+
+--Erkek çalışanların sayısı 1’den fazla olan ülkelerin maaş ortalamasını getiren sorgu
+Select ulke,count(cinsiyet),round(avg(maas)) from personel
+Where cinsiyet='E'
+group by ulke having count(cinsiyet)>1
