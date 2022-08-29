@@ -1,0 +1,39 @@
+CREATE TABLE workers
+(
+  id int,
+  name varchar(20),
+  title varchar(60),
+  manager_id int
+);
+
+INSERT INTO workers VALUES(1, 'Ali Can', 'Dev', 2);
+INSERT INTO workers VALUES(2, 'John Davis', 'QA', 3);
+INSERT INTO workers VALUES(3, 'Angie Star', 'Dev Lead', 4);
+INSERT INTO workers VALUES(4, 'Amy Sky', 'CEO', 5);
+
+select * from workers;
+
+-- 1:Tabloya company_industry isminde sütun ekleyiniz
+Alter table workers add company_industry varchar(30);
+
+-- 2:tablodaki worker_address sütununu ekeleyin
+Alter table workers add column worker_address varchar(40);
+
+-- 3:tablodaki worker_address sütununu siliniz
+Alter table workers drop column worker_address;
+
+-- Tablodaki company_industry sütununu, company_profession olarak değiştiriniz.
+Alter table workers rename column company_industry to company_profession;
+
+
+
+
+
+
+
+
+
+
+
+
+
