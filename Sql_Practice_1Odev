@@ -1,0 +1,85 @@
+interview questions 
+CREATE TABLE personel6
+(
+pers_id int, 
+isim varchar(50), 
+sehir varchar(50), 
+maas int, 
+sirket varchar(20)
+);
+INSERT INTO personel6 VALUES(123456789, 'Johnny Walk', 'New Hampshire', 2500, 'IBM');
+INSERT INTO personel6 VALUES(234567891, 'Brian Pitt', 'Florida', 1500, 'LINUX');
+INSERT INTO personel6 VALUES(245678901, 'Eddie Murphy', 'Texas', 3000, 'WELLS FARGO');
+INSERT INTO personel6 VALUES(456789012, 'Teddy Murphy', 'Virginia', 1000, 'GOOGLE');  
+INSERT INTO personel6 VALUES(567890124, 'Eddie Murphy', 'Massachuset', 7000, 'MICROSOFT');
+INSERT INTO personel6 VALUES(456789012, 'Brad Pitt', 'Texas', 1500, 'TD BANK');
+INSERT INTO personel6 VALUES(123456719, 'Adem Stone', 'New Jersey', 2500, 'IBM');
+
+CREATE TABLE isciler 
+(
+is_id int,
+is_isim varchar(50), 
+is_sehir varchar(50), 
+is_maas int, 
+is_sirket varchar(20)
+);
+INSERT INTO isciler VALUES(123456789, 'John Walker', 'Florida', 2500, 'IBM');
+INSERT INTO isciler VALUES(234567890, 'Brad Pitt', 'Florida', 1500, 'APPLE');
+INSERT INTO isciler VALUES(345678901, 'Eddie Murphy', 'Texas', 3000, 'IBM');
+INSERT INTO isciler VALUES(456789012, 'Eddie Murphy', 'Virginia', 1000, 'GOOGLE');
+INSERT INTO isciler VALUES(567890123, 'Eddie Murphy', 'Texas', 7000, 'MICROSOFT');
+INSERT INTO isciler VALUES(456789012, 'Brad Pitt', 'Texas', 1500, 'GOOGLE');
+INSERT INTO isciler VALUES(123456710, 'Mark Stone', 'texas', 2500, 'IBM');
+
+
+
+-- 1) Her iki tablodaki ortak id’leri ve 
+--     personel6 tablosunda bu id’ye sahip isimleri
+-- isme gore sirali olarak listeleyen query yaziniz
+1.yol:
+Select pers_id,isim from personel6 
+where exists(select is_id from isciler where isciler.is_id=personel6.pers_id) order by isim
+
+
+2.Yol:
+select pers_id,isim from personel6
+where pers_id in(select is_id from isciler) order by isim
+
+
+-- 2) Personel6 tablosunda kac tane kayit oldugunu gosteren query yazin
+Select count(*)As Kayıt_sayısı from personel6
+
+-- 3)Isciler tablosunda en yuksek maasi alan kisinin tum bilgilerini gosteren query yazin
+Select * from isciler order by is_maas desc limit 1
+
+-- 4) Isciler tablosunda ikinci en yuksek maasi maasi gosteren query yazin
+Select is_maas from isciler order by is_maas desc limit 1 offset 1
+Select max(is_maas) from isciler where is_maas<(Select max(is_maas) from isciler)
+                                                     
+ --5) Isciler tablosunda ikinci en yuksek maasi alan kisinin tum bilgilerini listeleyen sorgu yaziniz
+ Select * from isciler order by is_maas desc limit 1 offset 1
+ 
+ 
+ SELECT * FROM personel6;
+ SELECT * FROM isciler;
+ 
+
+ 
+ 
+ -- Her markanin ismini, calisan sayisini ve o markaya ait
+--calisanlarin maksimum ve minumum maaşini listeleyen bir Sorgu yaziniz.
+
+SELECT marka_isim,calisan_sayisi,(SELECT max(maas) from calisanlar2 where marka_isim=isyeri) AS max_maas,
+(SELECT min(maas) from calisanlar2 where marka_isim=isyeri) AS min_maas
+from markalar;
+
+
+--Her markanin id’sini, ismini ve toplam kaç şehirde 
+--bulunduğunu listeleyen bir SORGU yaziniz.
+select marka_id,marka_isim,(select count(sehir) from calisanlar2 where marka_isim=isyeri)
+As sehir_sayisi from markalar
+ 
+ 
+ 
+ 
+ 
