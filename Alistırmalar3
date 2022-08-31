@@ -21,10 +21,10 @@ drop table teachers
 
 ------------------------------------------------------------------------
 
-insert into teachers values(1001,'Ercan Altun','Teknoloji ve Tasarım',44);
-insert into teachers values(1002,'Salih Baba','Matematik',25);
-insert into teachers values(1003,'Amine Kübra','İngilizce','39');
-insert into teachers values(1004,'Selim Dede','Fizik',36);
+insert into teachers values('Ercan Altun','Teknoloji ve Tasarım',44,18);
+insert into teachers values('Salih Baba','Matematik',25,5);
+insert into teachers values('Amine Kübra','İngilizce','39',15);
+insert into teachers values('Selim Dede','Fizik',36,10);
 
 select * from teachers
 
@@ -109,6 +109,13 @@ select * from teachers where id between 1001 and 1003;--1001,1002,1003 'ü getir
 --SORU -2 :Yaşı 25 ile 40 arasında olan teachers ları listele
 select *  from teachers where yas between 25 and 40;
 
+Select * from teachers
+Where yas between 25 and 40
+
+Select * from teachers 
+Where ogretmenlik_senesi between 5 and 15
+order by ogretmenlik_senesi desc
+
 
 ------------- " OR "" -----------------------------------------------------
 
@@ -126,6 +133,10 @@ select * from teachers_adress where sehir between 'Ankara' and 'Bursa';
 select * from teachers
 select * from teachers_adress order by adres_id
 
+Select * from teachers 
+Where yas=25 or yas=40 
+
+
 
 --------------------- IN ----------------------------------------------------
 
@@ -137,6 +148,10 @@ select * from teachers_adress where adres_id in (1001,1002,1003);
 --SORU-2 :teacher tablosundan yasları 25,36,44 olan teachers'ları listele
 select * from teachers where yas in(25,36,44);
 
+--SORU-2 :teacher tablosundan yasları 25,36,44 olan teachers'ları listele
+Select * from teachers 
+Where yas in(25,36,44)
+order by yas 
 
 ------- "LIKE = ~~ ""  ---- "NOT LIKE = !~~ "" ---- "ILIKE = ~~* ""---------"NOT ILIKE = !~~* ""------
 
@@ -160,9 +175,13 @@ select * from teachers WHERE isim_soyisim like '%n'; --Ercan Altun
 --SORU-3: Isminin 2. harfi e olan personeli listeleyiniz
 select * from  teachers where branş ilike '_i%'; ---Fizik
 
+-- SORU -4: Ismi S harfi ile baslayan teachers ları listele
+Select * from teachers
+Where isim_soyisim ilike 'S%'
 
-
-
+--SORU-5: Isminin 3. harfi z olan branşı listeleyiniz
+Select * from teachers 
+Where branş ~~* '__z%'
 
 
 
