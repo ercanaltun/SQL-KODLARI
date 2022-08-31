@@ -92,7 +92,7 @@ from workers
 where salary <2000;
 
 --salary değeri 3000'den yüksek olan state değerlerini ve
---salary değeri 2000'den küçük olan name değerlerini tekrarsız olarak bulun.
+--salary değeri 2000'den küçük olan name değerlerini olarak bulun.
 Select state As "Name and State", salary
 from workers 
 where salary >3000
