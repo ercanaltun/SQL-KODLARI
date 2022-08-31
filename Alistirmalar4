@@ -131,6 +131,10 @@ select * from  kelimeler where kelime ~'[o][o]{2}'
 select * from kelimeler where kelime similar to '[asy]%[mf]'
 select * from kelimeler where kelime ~ '[asy](.*)[mf]$'
 
+
+--'a', 's' yada 'y' ile başlayan VE 'm' yada 'f' ile biten "kelime" değerlerini çağır
+Select * from kelimeler 
+Where kelime ~*'^[asy](.*)[mf]$'
 -----------------------------------------------------------------------------------------------------------
 
 CREATE TABLE tedarikciler -- parent

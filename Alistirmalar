@@ -32,6 +32,12 @@ alter table kurs rename column kurs_ismi to kurs_adı;
 
 alter table kurs rename column kurs_adı to kursiyer;
 
+Alter table kurs add column sehir varchar(20)
+
+Alter table kurs rename ucret to maas
+Alter table kurs rename kurs_ismi to Kursiyer
+Alter table kurs drop sehir
+
 
 --DML(DATA MANUPILATION LANGUANGE)--
 --Tablo içindeki verilerde ekleme,değiştirme ve silme işlemi yapar
@@ -54,7 +60,8 @@ update kurs set ucret=1250 where kurs_id=30;
 delete from kurs where kurs_id=50;
 delete from kurs where kursiyer='Taha Bisgin' or ucret=1200;
 
-
+Update kurs set maas=1500
+where kursiyer='Ercan Altun'
 
 
 

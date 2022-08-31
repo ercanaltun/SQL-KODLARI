@@ -90,3 +90,13 @@ where maas>(select min(maas) from calisanlar2 where maas>(select min(maas) from 
 
 
 
+
+
+
+
+
+
+
+
+
+
