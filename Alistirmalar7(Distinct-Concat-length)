@@ -1,0 +1,59 @@
+Select * from calisanlar
+-------------------------------------------------------------------------------
+-------------------------------DISTINCT----------------------------------------
+--DISTINCT: Tekrarlı ifadeleri 1 tane olarak döndürür
+Select Distinct isim From calisanlar
+
+
+------------------------------------------------------------------------------
+-------------------------------CONCAT-----------------------------------------
+--Concat():Birden fazla sutun veya String degerini birleştirmek için kulllanılır
+Select Concat(isim,' ',sehir) As " isim ve sehir "from calisanlar
+
+
+------------------------------------------------------------------------------
+-------------------------------LENGTH-----------------------------------------
+--Length: Java'da olduğu gibi uzunluğu verir
+Select Concat(isim, ' ',sehir) As "isimler ve sehirler" from calisanlar
+order by length(isim) + length(sehir) 
+
+
+-------------------------------------------------------------------------------
+-------------------------------UNION OPERATOR----------------------------------
+/*
+--UNION Operator: 1) iki sorgu (query) sonucunu birleştirmk için kullanılır
+                  2) tekrarsız(unique) recordları verir        
+                  3)Tek bir sutuna çok sutun koyaniliriz
+			      4)tek bir sutuna çok sutun koyarken mevcut data turune dikkat etmek gerekir
+
+*/
+--Union All: Union gibi çalışır.Ancak tum değerleri getirir
+--maası 2500'den yüksek olan sehir değerlerini ve
+--2000'den küçük olan isim değerlerini tekrarsız olarak bulun.
+Select sehir As "sehir ve isim", maas 
+from calisanlar
+where maas>2500
+
+Union
+
+Select isim, maas
+from calisanlar
+where maas<2000;
+
+--Union All: Union gibi çalışır.Ancak tum değerleri getirir
+
+
+-------------------------------------------------------------------------------
+----------------------------INTERSECT------------------------------------------
+--INTERSECT Operator: İki sorgu (query) sonucunun ortak(common) değerlerini verir. 
+--Unique(tekrarsız) recordları verir.
+
+--maaşı 1000'den büyük olan isimleri ve maaşı 2000'den küçük olan isimleri tekrarsız bulun
+Select isim from calisanlar
+where maas>1000
+Intersect
+Select isim from calisanlar
+Where maas<2000;
+
+
+

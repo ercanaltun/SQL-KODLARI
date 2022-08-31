@@ -1,0 +1,68 @@
+Select * from calisanlar
+select * from markalar
+Alter table calisanlar rename  isyeri to marka_isim
+
+Insert into calisanlar values(230145015,'Veli Dumanli','Adana',3500,'Adidas')
+Insert into calisanlar values(230145016,'Ali Duman','Adana',3500,'Defacto')
+Insert into calisanlar values(230145019,'Zeliha Duman','Adana',3500,'Koton')
+Insert into calisanlar values(230145020,'Veli Uzman','Adana',1500,'Civil')
+Insert into calisanlar values(230145022,'Veli Dumankaya','Adana',4500,'Nike')
+---------------------------------------------------------------------------------
+--------------------------------EXCEPT-------------------------------------------
+--EXCEPT Operator:hariç demektir.Bir sorgu sonucundan başka bir sorgu sonucunu 
+--- çıkarmakiçin kullanılır. Unique(tekrarsız) recordları verir.
+
+--Maaşı 2000'den yüksek olanları ve 'Pierre Cardin'de çalışmayanların isimlerini bulun
+Select isim from calisanlar
+Where maas>2000
+Except
+Select isim from calisanlar
+Where isyeri='Pierre Cardin'
+
+--------------------------------------------------------------------------------
+-------------------------------JOINS--------------------------------------------
+
+/*
+1)INNER JOINS =>2 Table 'ın kesiştiği alanı verir
+2)LEFT JOIN   =>2 table 'dan(1.) tabloyu  verir(Kesişen yerleri de alır)     
+3)RIGHT JOIN  =>2 table 'dan (2.) tabloyu  verir(Kesişen yerleri de alır)
+4)FULL JOIN   =>İki table 'ında tüm data sınırı verir
+5)SELF JOIN   =>tek table üzerinde çalışırken 2 table varmış gibi çalışır
+*/
+
+----1) INNER JOIN
+--Ortak marka_isim için isim, sehir,maas ve calisan_sayisi değerlerini çağırın.
+Select c.isim, c.sehir,c.maas,m.calisan_sayisi from calisanlar c
+Inner join markalar m
+On c.marka_isim=m.marka_isim
+
+
+----2)LEFT JOIN  
+--Markalar table'ındaki marka_isim için isim, sehir,maas ve calisan_sayisi değerlerini çağırın.
+Select m.marka_isim,m.marka_id,c.isim,c.sehir,c.maas from markalar m
+Left Join calisanlar c
+On c.marka_isim=m.marka_isim
+
+
+----3)RIGHT JOIN 
+Select m.marka_isim,m.marka_id,c.isim,c.sehir,c.maas from markalar m
+Right Join calisanlar c
+On c.marka_isim=m.marka_isim
+
+
+----4)FULL JOIN
+Select m.marka_id,c.marka_isim,c.isim,c.sehir,calisan_sayisi from markalar m
+Full Join calisanlar c
+On m.marka_isim=c.marka_isim
+
+
+----5)SELF JOIN 
+--workers tablosunu kullanarak çalışanların yöneticilerini gösteren bir tablo hazırlayın.
+
+Select employee.name As Employee, manager.name As manager
+From workers employee Full Join workers manager
+On employee.manager_id=manager.id
+
+
+
+
