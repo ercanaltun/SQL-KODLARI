@@ -1,0 +1,8 @@
+Insert into family values('Ercan','Dad',44);
+Insert into family values('Kübra','Mum',38);
+Insert into family values('Salih','Old Son',11);
+Insert into family values('Selim','Son',9);
+
+Select * from family
+
+
