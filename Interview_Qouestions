@@ -1,0 +1,36 @@
+-----------------------------Interview Questions----------------------------------------
+
+-- 1) Her iki tablodaki ortak id’leri ve 
+--     personel6 tablosunda bu id’ye sahip isimleri
+-- isme gore sirali olarak listeleyen query yaziniz
+
+
+
+-- 2) Her iki tablodaki ortak id ve isme sahip kayitlari listeleyen query yaziniz
+
+
+-- 3) Persone6 tablosunda kac farkli sehirden personel var?
+
+
+-- 4) Personel6 tablosunda id’si cift sayi olan personel’in 
+--tum bilgilerini listeleyen Query yazini
+
+
+-- 5) Personel6 tablosunda kac tane kayit oldugunu gosteren query yazin
+
+
+-- Isciler tablosunda en yuksek maasi alan kisinin tum bilgilerini gosteren query yazin
+
+
+-- Personel6 tablosunda en dusuk maasi alan kisinin tum bilgilerini gosteren query yazin
+
+
+-- 8) Isciler tablosunda ikinci en yuksek maasi maasi gosteren query yazin
+
+
+-- 9)Isciler tablosunda ikinci en yuksek maasi alan kisinin tum bilgilerini
+--listeleyen sorgu yaziniz
+
+
+-- Isciler tablosunda en yuksek maasi alan iscinin disindaki tum iscilerin,
+--tum bilgilerini gosteren query yazin
