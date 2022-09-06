@@ -1,0 +1,81 @@
+------------------------------- sql_practise 1 ------------------------------------------                                                                            
+-- 1) Tablo bilgilerini listeleyiniz.
+select * from personel;
+
+-- 3) id'si 8 olan personel bilgilerini listeleyiniz
+Select * from personel 
+Where id=8;
+
+-- 4) id'si 5 olan personelin isim, yaş ve email bilgilerini listeleyiniz
+Select isim,yas,email 
+From personel
+Where id=5;
+
+-- 5) 30 yaşından büyük personel bilgilerini listeleyiniz.
+Select * from personel
+Where yas>30;
+
+-- 6) maası 21000 olmayan personel bilgilerini listeleyiniz.
+Select * from personel
+Where maas  <> 21000;
+
+-- 7) ismi a harfi ile başlayan personel bilgilerini listeleyiniz.
+Select * from personel
+where isim ilike 'a%';
+
+-- 8) ismi n harfi ile biten personel bilgilerini listeleyiniz.
+Select * from personel
+where isim ilike '%n';
+
+-- 9) email adresi gmail olan personel bilgilerini listeleyiniz.
+Select * from personel
+where email ilike '%gmail.com';
+
+-- 10) email adresi gmail olmayan personel bilgilerini listeleyiniz.
+Select * from personel
+where email not ilike '%gmail.com';
+
+-- 11) id'si 3,5,7 ve 9 olan personel bilgilerini listeleyiniz.
+Select * from personel
+where id in(3,5,7,9);
+
+-- 12) yaşı 39,48 ve 54 olmayan personel bilgilerini listeleyiniz.
+Select * from personel
+where yas in(39,48,54);
+
+-- 13) yaşı 30 ve 40 arasında olan personel bilgilerini listeleyiniz.
+Select * from personel
+where yas between 30 and 40;
+
+-- 14) yaşı 30 ve 40 arasında olmayan personel bilgilerini listeleyiniz.
+Select * from personel
+where yas not between 30 and 40;
+
+-- 15) emaili null olan personel bilgilerini listeleyiniz
+Select * from personel
+where email is null;
+
+-- 16) personel bilgilerini yaşa göre sıralayınız.
+Select * from personel
+order by yas
+
+-- 17) personel bilgilerini maaşa göre sıralayınız.
+Select * from personel
+order by maas;
+
+-- 18) personelin yaşlarını büyükten küçüğe doğru sıralayınız.
+Select * from personel
+order by yas desc
+
+-- 19) personelin maaşlarını büyükten küçüğe doğru sıralayınız.
+Select * from personel
+order by maas desc;
+
+-- 20) En yüksek maaş olan ilk 3 personel bilgilerini sıralayınız
+Select * from personel
+order by maas desc limit 3
+
+
+
+
+

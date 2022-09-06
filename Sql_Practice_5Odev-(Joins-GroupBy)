@@ -1,0 +1,106 @@
+-----------------------------------Sql_Practice-Joins-GroupBy------------------------------------------
+
+CREATE TABLE calisanlar1 
+(
+id int, 
+isim VARCHAR(50), 
+sehir VARCHAR(50), 
+maas int, 
+isyeri VARCHAR(20)
+);
+
+INSERT INTO calisanlar1 VALUES(123456789, 'Ali Seker', 'Istanbul', 2500, 'Vakko');
+INSERT INTO calisanlar1 VALUES(234567890, 'Ayse Gul', 'Istanbul', 1500, 'LCWaikiki');
+INSERT INTO calisanlar1 VALUES(345678901, 'Veli Yilmaz', 'Ankara', 3000, 'Vakko');
+INSERT INTO calisanlar1 VALUES(456789012, 'Veli Yilmaz', 'Izmir', 1000, 'Pierre Cardin');
+INSERT INTO calisanlar1 VALUES(567890123, 'Veli Yilmaz', 'Ankara', 7000, 'Adidas');
+INSERT INTO calisanlar1 VALUES(456789012, 'Ayse Gul', 'Ankara', 1500, 'Pierre Cardin');
+INSERT INTO calisanlar1 VALUES(123456710, 'Fatma Yasa', 'Bursa', 2500, 'Vakko');
+
+    
+CREATE TABLE markalar
+(
+marka_id int, 
+marka_isim VARCHAR(20), 
+calisan_sayisi int
+);
+    
+INSERT INTO markalar VALUES(100, 'Vakko', 12000);
+INSERT INTO markalar VALUES(101, 'Pierre Cardin', 18000);
+INSERT INTO markalar VALUES(102, 'Adidas', 10000);
+INSERT INTO markalar VALUES(103, 'LCWaikiki', 21000);
+select * from calisanlar1;
+select * from markalar;
+--------------------------------------------------------------------------------------
+
+-- SORU1: calisan sayisi 15.000’den cok olan markalarin isimlerini ve bu
+-- markada calisanlarin isimlerini ve maaşlarini listeleyin.
+Select c.isyeri,c.isim,c.maas from calisanlar1 c
+Left join markalar m
+On c.isyeri=m.marka_isim
+Where calisan_sayisi>15000;
+
+--------------------------------------------------------------------------------------
+
+-- SORU2: marka_id’si 101’den büyük olan marka çalişanlarinin isim, maaş ve 
+-- şehirlerini listeleyiniz. 
+Select c.isim,c.maas,c.sehir from calisanlar1 c
+left join markalar m
+On c.isyeri=m.marka_isim
+Where marka_id>101;
+
+
+-- SORU3: Ankara’da calisani olan markalarin marka id'lerini ve calisan sayilarini listeleyiniz.
+Select m.marka_id,m.calisan_sayisi from markalar m
+right join calisanlar1 c
+On c.isyeri=m.marka_isim
+Where sehir='Ankara';
+
+--------------------------------------------------------------------------------------
+
+-- SORU4: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin toplam maaşini listeleyen bir Sorgu yaziniz.
+Select m.marka_isim, m.calisan_sayisi,sum(maas) from markalar m
+Right Join calisanlar1 c
+On c.isyeri=m.marka_isim
+Group by m.marka_isim ,m.calisan_sayisi ;
+ 
+--------------------------------------------------------------------------------------
+
+-- SORU5: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin ortalama maaşini listeleyen bir Sorgu yaziniz.
+Select m.marka_isim,m.calisan_sayisi,round(avg(maas)) from markalar m
+Right Join calisanlar1 c
+On m.marka_isim=c.isyeri
+Group by m.marka_isim,m.calisan_sayisi;
+
+--------------------------------------------------------------------------------------
+
+-- SORU6: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin maksimum ve minumum maaşini listeleyen bir Sorgu yaziniz.
+Select m.marka_isim,m.calisan_sayisi,max(maas),min(maas) from markalar m
+Right Join calisanlar1 c
+On m.marka_isim=c.isyeri
+Group by m.marka_isim,m.calisan_sayisi;
+
+-- SORU7: Her markanin id’sini, ismini ve toplam kaç şehirde bulunduğunu marka_id sine göre naturel order olarak listeleyiniz
+Select m.marka_id,m.marka_isim,count(sehir) from markalar m
+Right join calisanlar1 c
+On m.marka_isim=c.isyeri
+Group by m.marka_id,m.marka_isim Order by marka_id 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
